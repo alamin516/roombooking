@@ -15,7 +15,6 @@ const DashboardLayout = () => {
     useEffect(() => {
         setLoading(true)
         getRole(user?.email).then(data => {
-            console.log(data)
             setRole(data)
             setLoading(false)
         })

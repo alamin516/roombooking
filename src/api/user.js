@@ -6,6 +6,7 @@ export const hostRequest = async hostData => {
         method: "PUT",
         headers: {
             'content-type': ['application/json'],
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify(hostData)
     })
@@ -21,7 +22,12 @@ export const getRole = async email => {
 
     const url = `${process.env.REACT_APP_API_URL}/user/${email}`;
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
     const user = await response.json();
     return user.role;
 
@@ -32,7 +38,12 @@ export const getAllUsers = async () => {
 
     const url = `${process.env.REACT_APP_API_URL}/users`;
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        headers: {
+            "Content-Type": "application/json",
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
     const users = await response.json();
     return users;
 }
@@ -47,6 +58,7 @@ export const makeHost = async user =>{
         method: "PUT",
         headers: {
             'content-type': ['application/json'],
+            authorization: `bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify({...user, role: 'host'})
     })

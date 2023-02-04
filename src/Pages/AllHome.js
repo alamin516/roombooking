@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getHome } from '../api/add-home'
+import { getHome } from '../api/services'
 import HomeCard from '../Components/Card/HomeCard'
 import Spinner from '../Components/Spinner/Spinner'
 
@@ -21,8 +21,8 @@ const AllHome = () => {
         <Spinner />
       ) : (
         <section className='max-w-screen-xl text-gray-600 body-font mx-auto'>
-          <div className='container pb-8 pt-2 mx-auto'>
-            <div className='grid lg:grid-cols-4 md:grid-cols-3 pt-4'>
+          <div className='pb-8 pt-2 mx-auto'>
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 pt-4 gap-5'>
               {homes.map((home, i) =>
                 <HomeCard
                   key={i}

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useContext } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { saveServices } from '../../api/add-home'
+import { saveServices } from '../../api/services'
 import { getImageUrl } from '../../api/imageUpload'
 import AddServiceForm from '../../Components/Form/AddServiceForm'
 import { AuthContext } from '../../contexts/AuthProvider'
@@ -12,7 +12,9 @@ const AddHome = () => {
   const { user } = useContext(AuthContext)
   const [arrivalDate, setArrivalDate] = useState(new Date())
   const [departureDate, setDepartureDate] = useState(arrivalDate.getTime() + 48 * 60 * 60 * 1000);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [preview, setPreview] = useState('')
+  const [uploadButtonText, setUploadButtonText] = useState('Upload Image')
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -66,6 +68,12 @@ const AddHome = () => {
 
   }
 
+  const handleImgPreview = image =>{
+    console.log(image)
+    setPreview(window.URL.createObjectURL(image))
+    setUploadButtonText(image.name)
+  }
+
   return (
     <>
       <h1 className='text-3xl font-bold text-gray-800 py-8 text-center'>
@@ -77,6 +85,9 @@ const AddHome = () => {
         setArrivalDate={setArrivalDate}
         departureDate={departureDate}
         setDepartureDate={setDepartureDate}
+        handleImgPreview={handleImgPreview}
+        preview={preview}
+        uploadButtonText={uploadButtonText}
       />
     </>
   )

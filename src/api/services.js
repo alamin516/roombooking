@@ -18,7 +18,12 @@ export const saveServices = async serviceData => {
 export const getServiceByEmail = async user => {
     const url = `${process.env.REACT_APP_API_URL}/services?${user?.email}`;
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        headers: {
+            "Content-Type": "application/json",
+            
+        }
+    })
     const data = await response.json();
     return data;
 }
@@ -26,7 +31,11 @@ export const getServiceByEmail = async user => {
 // Save in Database
 export const getHome = async () => {
     const url = `${process.env.REACT_APP_API_URL}/services`;
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
     const data = await response.json();
     return data;
 }
@@ -41,6 +50,7 @@ export const updateHome = async homeData=> {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
+        
       },
       body: JSON.stringify(homeData),
     })
@@ -57,7 +67,19 @@ export const deleteHome = async id => {
 
     const response = await fetch(url, {
         method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            
+        }
     });
+    const data = await response.json();
+    return data;
+}
+
+// Serach Result 
+export const getSearchResult = async (location)=>{
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/serach-result?location=${location}`)
+
     const data = await response.json();
     return data;
 }

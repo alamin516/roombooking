@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getHome } from '../api/add-home'
+import { getHome } from '../api/services'
 import ExpCard from '../Components/Card/ExpCard'
 import HomeCard from '../Components/Card/HomeCard'
 import SearchForm from '../Components/Form/SearchForm'

@@ -12,9 +12,7 @@ const AllUsers = () => {
   }, [])
 
   const handleRequest = (user) => {
-    console.log()
     makeHost(user).then(data => {
-      console.log(data)
       getUsers()
     })
   }

@@ -18,7 +18,6 @@ const SearchForm = () => {
         from: arrivalDate,
         to: departureDate
       }
-      console.log(query)
       navigate('/search-result', {state: query})
     }
 

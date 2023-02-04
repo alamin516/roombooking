@@ -3,11 +3,15 @@ import React from 'react'
 import DatePicker from 'react-datepicker'
 
 const AddServiceForm = ({
-  handleSubmit, 
-  arrivalDate, 
-  setArrivalDate, 
-  departureDate, 
-  setDepartureDate}) => {
+  handleSubmit,
+  arrivalDate,
+  setArrivalDate,
+  departureDate,
+  setDepartureDate,
+  handleImgPreview,
+  preview,
+  uploadButtonText,
+}) => {
 
 
   return (
@@ -46,10 +50,10 @@ const AddServiceForm = ({
               <div className='shadow-md rounded-md my-2 p-3 flex justify-between items-center'>
                 <div>
                   <p className='block text-sm text-gray-500'>From</p>
-                  <DatePicker 
-                  selected={arrivalDate} 
-                  onChange={date=> setArrivalDate(date)}
-                  className='w-2/3' />
+                  <DatePicker
+                    selected={arrivalDate}
+                    onChange={date => setArrivalDate(date)}
+                    className='w-2/3' />
                 </div>
 
                 <CalendarIcon className='h5 w-5' />
@@ -57,10 +61,10 @@ const AddServiceForm = ({
               <div className='shadow-md rounded-md my-2 p-3 flex justify-between items-center'>
                 <div>
                   <p className='block text-sm text-gray-500'>To</p>
-                  <DatePicker 
-                  selected={departureDate} 
-                  onChange={date => setDepartureDate(date)}
-                  className='w-2/3'/>
+                  <DatePicker
+                    selected={departureDate}
+                    onChange={date => setDepartureDate(date)}
+                    className='w-2/3' />
                 </div>
 
                 <CalendarIcon className='h5 w-5' />
@@ -130,17 +134,19 @@ const AddServiceForm = ({
             <div className='flex space-x-4 items-center'>
               <label
                 htmlFor='image'
-                className='p-3 text-center w-full h-16 rounded-md cursor-pointer text-gray-500 font-bold border border-dashed  border-green-600'
+                className='p-3 text-center w-full h-20 rounded-md cursor-pointer text-gray-500 font-bold border border-dashed  border-green-600'
               >
                 <input
                   type='file'
+                  onChange={event => handleImgPreview(event.target.files[0])}
                   name='image'
                   id='image'
                   accept='image/*'
                   hidden
                 />
-                {<p className='mt-2'>Drag 'n' drop some files here</p>}
+                {<p className='mt-3 text-sm'>{uploadButtonText}</p>}
               </label>
+              {preview && <img src={preview} alt=""  className='w-20 h-20'/>}
             </div>
 
             <div className='space-y-1 text-sm'>

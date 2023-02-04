@@ -14,7 +14,6 @@ const MyBookings = () => {
   useEffect(() => {
     setLoading(true)
     getAllBookingsByEmail(user?.email).then(data => {
-      console.log(data)
       setBookings(data)
       setLoading(false)
     })

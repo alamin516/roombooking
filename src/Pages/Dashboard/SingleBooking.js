@@ -31,7 +31,7 @@ const SingleBooking = ({booking}) => {
                     </p>
                   </td>
                   <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                    <p className='text-gray-900 whitespace-no-wrap'>${booking?.totalPrice}</p>
+                    <p className='text-gray-900 whitespace-no-wrap'>${booking?.price}</p>
                   </td>
                   <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                     <p className='text-gray-900 whitespace-no-wrap'>{booking?.home?.from}</p>

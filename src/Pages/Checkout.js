@@ -10,31 +10,15 @@ import { saveBooking } from '../api/bookings'
 import { toast } from 'react-hot-toast'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Payment from '../Components/Payment'
+import CheckoutForm from '../Components/Form/CheckoutForm'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 
 const Checkout = () => {
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PB_KEY);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { state: checkoutData } = useLocation();
-
-  // const homeData = {
-  //   _id: '60ehjhedhjdj3434',
-  //   location: 'Dhaka, Bangladesh',
-  //   title: 'Huge Apartment with 4 bedrooms',
-  //   image: 'https://i.ibb.co/YPXktqs/Home1.jpg',
-  //   from: '17/11/2022',
-  //   to: '21/11/2022',
-  //   host: {
-  //     name: 'John Doe',
-  //     image: 'https://i.ibb.co/6JM5VJF/photo-1633332755192-727a05c4013d.jpg',
-  //     email: 'johndoe@gmail.com',
-  //   },
-  //   price: 98,
-  //   total_guest: 4,
-  //   bedrooms: 2,
-  //   bathrooms: 2,
-  //   ratings: 4.8,
-  //   reviews: 64,
-  // }
 
   const [bookingData, setBookingData] = useState({
     home: {
@@ -47,26 +31,12 @@ const Checkout = () => {
     },
     hostEmail: checkoutData?.homeData?.host?.email,
     message: '',
-    totalPrice: parseFloat(checkoutData?.total),
+    price: parseFloat(checkoutData?.total),
     guestEmail: user?.email,
+    guestName: user?.displayName
 
   })
   const [selectedIndex, setSelectedIndex] = useState(0)
-
-  const handleBooking = () => {
-    // return console.log(bookingData)
-
-    saveBooking(bookingData)
-      .then(data => {
-        console.log(data)
-        toast.success('Booking Successful!')
-        navigate('/dashboard/my-bookings')
-      })
-      .catch(err => {
-        console.log(err)
-        toast.error(err?.message)
-      })
-  }
 
   return (
     <div className='md:flex gap-5 items-start justify-between sm:mx-10 md:mx-20 px-4 lg:mx-40 py-4'>
@@ -156,7 +126,11 @@ const Checkout = () => {
             </Tab.Panel>
             <Tab.Panel>
               {/* Payment Comp */}
-              <Payment bookingData={bookingData} />
+              <Elements stripe={stripePromise} >
+                <CheckoutForm
+                  bookingData={bookingData}
+                />
+              </Elements>
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

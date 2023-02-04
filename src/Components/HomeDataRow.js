@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import React, { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { deleteHome } from '../api/add-home'
+import { deleteHome } from '../api/services'
 import EditModal from './Modal/EditModal'
 import DeleteModal from './Modal/HomeDelete'
 
@@ -16,10 +16,8 @@ const HomeDataRow = ({ home, fetchHomes}) => {
     setIsOpen(false)
   }
   const modalHandler = id => {
-    console.log(id)
     deleteHome(id)
       .then(data => {
-        console.log(data)
         toast.success('Home deleted')
         fetchHomes()
       })

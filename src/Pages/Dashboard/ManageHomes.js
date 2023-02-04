@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getServiceByEmail } from '../../api/add-home'
+import { getServiceByEmail } from '../../api/services'
 import PrimaryButton from '../../Components/Button/PrimaryButton'
 import HomeDataRow from '../../Components/HomeDataRow'
 import { AuthContext } from '../../contexts/AuthProvider'

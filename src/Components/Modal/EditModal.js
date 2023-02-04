@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { format } from 'date-fns'
 import { Fragment, useState } from 'react'
 import toast from 'react-hot-toast'
-import { updateHome } from '../../api/add-home'
+import { updateHome } from '../../api/services'
 import { getImageUrl } from '../../api/imageUpload'
 import UpdateServiceForm from '../Form/UpdateServiceForm'
 

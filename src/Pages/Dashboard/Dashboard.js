@@ -10,13 +10,11 @@ const Dashboard = () => {
   useEffect(() => {
     setLoading(true)
     getRole(user?.email).then(data => {
-      console.log(data)
       setRole(data)
       setLoading(false)
     })
   }, [user])
 
-  console.log(role)
 
   return (
     <div className='h-screen text-gray-700 flex flex-col justify-center items-center pb-16 md:-x-64'>
